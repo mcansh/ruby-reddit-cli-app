@@ -5,7 +5,7 @@ class Reddit::Scraper
     posts = []
     postsList = doc.css('#siteTable > div.thing.link').first(10)
     postsList.each do |post|
-      title = post.css('.title a').text.strip
+      title = post.css('.title a.title').text.strip
       author = post.css('.author').text.strip
       timestamp = post.css('.live-timestamp').text.strip
       comments = post.css('.comments').text.strip
