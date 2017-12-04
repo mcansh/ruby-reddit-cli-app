@@ -1,2 +1,0 @@
-class Reddit::Post
-end
