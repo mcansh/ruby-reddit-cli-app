@@ -1,0 +1,2 @@
+class Reddit::Scraper
+end
