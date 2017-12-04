@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Logan McAnsh"]
   spec.email         = ["logan@mcan.sh"]
 
-  spec.summary       = "Get the top posts from r/ruby"
-  spec.description   = "Get the top posts from r/ruby"
+  spec.summary       = "Get the current hot posts from r/ruby"
+  spec.description   = "Get the current hot posts from r/ruby"
   spec.homepage      = "https://github.com/mcansh/ruby-reddit-cli-app"
   spec.license       = "MIT"
 
