@@ -12,7 +12,10 @@ class Reddit::CLI
   def show_posts
     @posts = Reddit::Scraper.scrape
     @posts.each_with_index do |post, i|
-      puts "#{i + 1}. #{post[:title]}"
+      upvotes = post[:upvotes].to_i
+      score = post[:upvotes].to_i >= 0 ? 'upvotes' : 'downvotes'
+
+      puts "#{i + 1}. #{upvotes} #{score} #{post[:title]} by #{post[:author]}"
     end
   end
 end
