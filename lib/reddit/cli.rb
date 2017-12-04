@@ -15,7 +15,7 @@ class Reddit::CLI
       upvotes = post[:upvotes].to_i
       score = post[:upvotes].to_i >= 0 ? 'upvotes' : 'downvotes'
 
-      puts "#{i + 1}. #{upvotes} #{score} #{post[:title]} by #{post[:author]}"
+      puts "#{i + 1}. #{upvotes} #{score} #{post[:title]} by #{post[:author].bold}"
     end
   end
 end
