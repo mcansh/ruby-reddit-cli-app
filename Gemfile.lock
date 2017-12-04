@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-reddit (0.1.0)
+    ruby-reddit (1.0.0)
       nokogiri
 
 GEM
