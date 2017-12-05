@@ -60,7 +60,7 @@ class Reddit::CLI
     puts "Posted: #{post[:timestamp]}"
     puts ""
     input = nil
-    while input == nil
+    while input != "exit"
       puts "Enter the option you'd like to perform:"
       puts "1. Open in browser"
       puts "2. Show hot posts"
@@ -69,6 +69,7 @@ class Reddit::CLI
         openInBrowser(post[:url])
       elsif input.to_i == 2
         show_posts
+        break
       else
         puts "Not sure what you want, type list or exit."
       end
