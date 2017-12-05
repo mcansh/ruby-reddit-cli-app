@@ -18,7 +18,7 @@ class Reddit::CLI
   def menu
     input = nil
     while input != "exit"
-      puts "Enter the number of the post you'd like more info on:"
+      puts "> Enter the number of the post you'd like more info on:"
       input = gets.strip.downcase
 
       if input.to_i > 0
@@ -26,9 +26,9 @@ class Reddit::CLI
       elsif input == "list"
         show_posts
       elsif input == "exit"
-        break
+        exit!
       else
-        puts "Not sure what you want, type list or exit."
+        puts "> Not sure what you want, type list or exit."
       end
     end
   end
@@ -61,17 +61,20 @@ class Reddit::CLI
     puts ""
     input = nil
     while input != "exit"
-      puts "Enter the option you'd like to perform:"
+      puts "> Enter the option you'd like to perform:"
       puts "1. Open in browser"
       puts "2. Show hot posts"
+      puts "3. Exit"
       input = gets.strip.downcase
       if input.to_i == 1
         openInBrowser(post[:url])
       elsif input.to_i == 2
         show_posts
         break
+      elsif input.to_i == 3 || input == "exit"
+        exit!
       else
-        puts "Not sure what you want, type list or exit."
+        puts "> Not sure what you want, type list or exit."
       end
     end
   end
