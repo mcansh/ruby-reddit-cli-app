@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-reddit (1.0.0)
+    ruby-reddit (1.0.2)
       colorize
       nokogiri
 
