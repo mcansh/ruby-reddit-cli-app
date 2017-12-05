@@ -25,7 +25,7 @@ class Reddit::CLI
         show_post(input.to_i-1)
       elsif input == "list"
         show_posts
-      elsif input == "exit"
+      elsif input == "exit" || input == "q"
         exit!
       else
         puts "> Not sure what you want, type list or exit."
@@ -45,13 +45,13 @@ class Reddit::CLI
     @posts = Reddit::Scraper.scrape
     @posts.each_with_index do |post, i|
       upvotes = get_score_text(i)
-      puts "#{i + 1}. #{upvotes} - #{post[:title]} by #{post[:author].bold}"
+      index = "#{i + 1}"
+      puts "#{index.bold}. #{upvotes} - #{post[:title]} by #{post[:author].bold}"
     end
   end
 
   def show_post(index)
     post = @posts[index.to_i]
-    upvotes = get_score_text(index.to_i)
     puts ""
     puts "Title: #{post[:title]}"
     puts "Author: #{post[:author]}"
@@ -71,7 +71,7 @@ class Reddit::CLI
       elsif input.to_i == 2
         show_posts
         break
-      elsif input.to_i == 3 || input == "exit"
+      elsif input.to_i == 3 || input == "exit" || input == "q"
         exit!
       else
         puts "> Not sure what you want, type list or exit."
