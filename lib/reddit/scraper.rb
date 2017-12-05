@@ -1,5 +1,5 @@
 class Reddit::Scraper
-  attr_accessor :title, :author, :timestamp, :comments, :upvotes, :url, :text
+  attr_accessor :title, :author, :timestamp, :comments, :upvotes, :url
   def self.scrape
     doc = Nokogiri::HTML(open("https://www.reddit.com/r/ruby", 'User-Agent' => 'ruby-reddit'))
     posts = []
@@ -11,7 +11,6 @@ class Reddit::Scraper
       comments = post.attr('data-comments-count')
       upvotes = post.attr('data-score')
       url = post.css('a.comments').attr('href')
-      text = post.css('.viewSource textarea').text
       newPost = {
         title: title,
         author: author,
@@ -19,7 +18,6 @@ class Reddit::Scraper
         comments: comments,
         upvotes: upvotes,
         url: url,
-        text: text
       }
       posts << newPost
     end
