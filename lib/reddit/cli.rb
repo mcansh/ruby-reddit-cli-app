@@ -2,7 +2,14 @@ class Reddit::CLI
   def call
     Reddit::Scraper.scrape
     puts "Here's the current hot list on r/ruby"
-    start
+  def openInBrowser(url)
+    if RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/
+      system "start #{url}"
+    elsif RbConfig::CONFIG['host_os'] =~ /darwin/
+      system "open #{url}"
+    elsif RbConfig::CONFIG['host_os'] =~ /linux|bsd/
+      system "xdg-open #{url}"
+    end
   end
 
   def start
