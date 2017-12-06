@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "reddit/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "ruby-reddit"
+  spec.name          = "reddit-ruby"
   spec.version       = Reddit::VERSION
   spec.authors       = ["Logan McAnsh"]
   spec.email         = ["logan@mcan.sh"]
