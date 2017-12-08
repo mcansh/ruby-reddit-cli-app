@@ -18,6 +18,7 @@ class Reddit::CLI
   def menu
     input = nil
     while input != "exit"
+      puts ""
       puts "> Enter the number of the post you'd like more info on:"
       input = gets.strip.downcase
 
@@ -65,6 +66,7 @@ class Reddit::CLI
       puts "1. Open in browser"
       puts "2. Show hot posts"
       puts "3. Exit"
+      puts ""
       input = gets.strip.downcase
       if input.to_i == 1
         openInBrowser(post[:url])
