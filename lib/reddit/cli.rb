@@ -36,8 +36,12 @@ class Reddit::CLI
 
   def get_score_text(index)
     post = @posts[index.to_i]
-    score = post[:upvotes].to_i >= 0 ? 'upvotes' : 'downvotes'
-    upvotes = post[:upvotes].to_i < 10 ? "0#{post[:upvotes]}" : "#{post[:upvotes]}"
+    upvotes = post[:upvotes]
+    if post[:upvotes].to_i == 1
+      score = post[:upvotes].to_i >= 0 ? 'upvote' : 'downvote'
+    else
+      score = post[:upvotes].to_i >= 0 ? 'upvotes' : 'downvotes'
+    end
     return "#{upvotes} #{score}"
   end
 
