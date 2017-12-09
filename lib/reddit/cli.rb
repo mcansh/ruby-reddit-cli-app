@@ -21,7 +21,7 @@ class Reddit::CLI
     while input != "exit"
       puts ""
       puts "> Enter the number of the post you'd like more info on:"
-      input = gets.strip.downcase
+      input = STDIN.gets.chomp.downcase
 
       if input.to_i > 0
         show_post(input.to_i-1)
@@ -71,7 +71,7 @@ class Reddit::CLI
       puts "2. Show hot posts"
       puts "3. Exit"
       puts ""
-      input = gets.strip.downcase
+      input = STDIN.gets.chomp.downcase
       if input.to_i == 1
         openInBrowser(post[:url])
       elsif input.to_i == 2
