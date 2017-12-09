@@ -1,7 +1,8 @@
 class Reddit::Scraper
   attr_accessor :title, :author, :timestamp, :comments, :upvotes, :url
-  def self.scrape
-    doc = Nokogiri::HTML(open("https://www.reddit.com/r/ruby", 'User-Agent' => 'ruby-reddit'))
+  def self.scrape(subreddit)
+    url = "https://www.reddit.com/r/#{subreddit}"
+    doc = Nokogiri::HTML(open(url, 'User-Agent' => 'ruby-reddit'))
     posts = []
     postsList = doc.css('#siteTable > div.thing.link').first(10)
     postsList.each do |post|

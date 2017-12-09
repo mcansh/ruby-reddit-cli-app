@@ -1,7 +1,8 @@
 class Reddit::CLI
   def call
-    puts "Here's the current hot list on r/ruby"
-    show_posts
+    @subreddit = ARGV[0] || "ruby"
+    puts "Here's the current hot list on r/#{@subreddit}"
+    show_posts(@subreddit)
     menu
   end
 
@@ -45,9 +46,8 @@ class Reddit::CLI
     return "#{upvotes} #{score}"
   end
 
-  def show_posts
-    Reddit::Scraper.scrape
-    @posts = Reddit::Scraper.scrape
+  def show_posts(subreddit)
+    @posts = Reddit::Scraper.scrape(subreddit)
     @posts.each_with_index do |post, i|
       upvotes = get_score_text(i)
       index = "#{i + 1}"
