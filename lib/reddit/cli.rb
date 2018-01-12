@@ -1,8 +1,11 @@
 class Reddit::CLI
   def call
     @subreddit = ARGV[0] || "ruby"
+    Reddit::Scraper.scrape(@subreddit)
+    @posts = Reddit::Post.all
     puts "Here's the current hot list on r/#{@subreddit}"
-    show_posts(@subreddit)
+    show_posts
+
     menu
   end
 
@@ -22,7 +25,6 @@ class Reddit::CLI
       puts ""
       puts "> Enter the number of the post you'd like more info on:"
       input = STDIN.gets.chomp.downcase
-
       if input.to_i > 0
         show_post(input.to_i-1)
       elsif input == "list"
@@ -37,32 +39,31 @@ class Reddit::CLI
 
   def get_score_text(index)
     post = @posts[index.to_i]
-    upvotes = post[:upvotes]
-    if post[:upvotes].to_i == 1
-      score = post[:upvotes].to_i >= 0 ? 'upvote' : 'downvote'
+    upvotes = post.upvotes
+    if post.upvotes.to_i == 1
+      score = post.upvotes.to_i >= 0 ? 'upvote' : 'downvote'
     else
-      score = post[:upvotes].to_i >= 0 ? 'upvotes' : 'downvotes'
+      score = post.upvotes.to_i >= 0 ? 'upvotes' : 'downvotes'
     end
     return "#{upvotes} #{score}"
   end
 
-  def show_posts(subreddit)
-    @posts = Reddit::Scraper.scrape(subreddit)
+  def show_posts
     @posts.each_with_index do |post, i|
       upvotes = get_score_text(i)
       index = "#{i + 1}"
-      puts "#{index.bold}. #{upvotes} - #{post[:title]} by #{post[:author].bold}"
+      puts "#{index.bold}. #{upvotes} - #{post.title} by #{post.author.bold}"
     end
   end
 
   def show_post(index)
     post = @posts[index.to_i]
     puts ""
-    puts "Title: #{post[:title]}"
-    puts "Author: #{post[:author]}"
-    puts "Score: #{post[:upvotes]}"
-    puts "Comments: #{post[:comments]}"
-    puts "Posted: #{post[:timestamp]}"
+    puts "Title: #{post.title}"
+    puts "Author: #{post.author}"
+    puts "Score: #{post.upvotes}"
+    puts "Comments: #{post.comments}"
+    puts "Posted: #{post.timestamp}"
     puts ""
     input = nil
     while input != "exit"
@@ -73,7 +74,7 @@ class Reddit::CLI
       puts ""
       input = STDIN.gets.chomp.downcase
       if input.to_i == 1
-        openInBrowser(post[:url])
+        openInBrowser(post.url)
       elsif input.to_i == 2
         show_posts
         break
